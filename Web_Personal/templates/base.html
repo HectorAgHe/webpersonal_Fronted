@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Hector Aguilar</title>
+    <title>Web Personal | {% block title %}{% endblock %}</title>
 
     <!-- Estilos y fuentes del template  -->
     <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css' ) }}" rel="stylesheet">
@@ -48,6 +48,7 @@
     </nav>
 
     {% block content%}
+    
 
     {% endblock %}  
 
