@@ -1,3 +1,4 @@
 este es el chido
 Flask
 Flask wtf
+email_validator
