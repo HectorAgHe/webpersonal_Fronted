@@ -67,6 +67,10 @@ def welcome():
 
     return render_template('admin/index.html', user_access= access)
 
+@app.errorhandler(404)
+def page_error_not_found(e):
+    return render_template('error/404.html')
+
 
 if __name__== '__main__':
     app.run(debug=True)
