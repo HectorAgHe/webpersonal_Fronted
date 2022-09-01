@@ -1,14 +1,19 @@
 
+import email
 from flask import Flask, redirect, render_template, request, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, EmailField
+from wtforms import (StringField,PasswordField,
+                    SubmitField, EmailField,
+                    IntegerField ,RadioField,
+                    SelectField, TextAreaField)
 from wtforms.validators import DataRequired, Email
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
 
 
-######### Rutas Public ###########
+########################33#### Rutas Public ###################################3
+
 @app.route('/')
 def index():
     return render_template('public/index.html')
@@ -51,13 +56,23 @@ def portfolio():
     ]
     return render_template('public/portfolio.html', projects=projects)
 
-################# Formularios de WTForms ##################
+################################ Formularios de WTForms ##################
 class LoginForm(FlaskForm):
     email = EmailField('Correo', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Ingresar')
 
-############ Rutas Login ############
+class RegisterForm(FlaskForm):
+    name = StringField('Nombre')
+    last_name = StringField('Apellidos')
+    email = EmailField('Correo')
+    password = PasswordField('Contraseña')
+    phone = IntegerField('Telefono')
+    is_married = RadioField('Estado civil', choices=[('true', 'Casado'),('False', 'Soltero')])
+    gender = SelectField('Genero', choices=[('male', 'Masculino'),('female', 'Femenino'),('other', 'Otro')])
+    submit = SubmitField('Registrar')
+
+######################### Rutas Login ##################################
 @app.route('/auth/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -72,19 +87,8 @@ def login():
 
 @app.route('/auth/register')
 def register():
-    return render_template('auth/register.html')
-
-@app.route('/welcome', methods=['GET', 'POST'])
-def welcome(form):
-    
-    if form.validate_on_submit():
-        email = form.email.data
-        password = form.password.data
-
-        return render_template('admin/index.html', email=email)
-
-    return redirect(url_for('login'))
-
+    form = RegisterForm()
+    return render_template('auth/register.html', form=form)
 
 
 @app.errorhandler(404)
