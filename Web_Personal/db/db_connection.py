@@ -1,12 +1,11 @@
 import pymysql
 
 def get_connection():
-    connection = pymysql.connect(hots='localhotst',
+    connection = pymysql.connect(host='localhost',
                                 user='root',
-                                passwd='',
+                                password='123456',
                                 db='web_personal',
-                                charset='utf8mb4',
-                                cursorclass=pymysql.cursors.Dictcursor)
+                                cursorclass=pymysql.cursors.DictCursor)
 
     return connection
     

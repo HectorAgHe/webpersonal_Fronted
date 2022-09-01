@@ -1,5 +1,7 @@
 ############ Imports Flask y python ###############
 from flask import render_template, Blueprint
+
+from db.db_connection import get_connection
 ############# Imports forms ######################
 from.forms import LoginForm, RegisterForm
 
@@ -14,6 +16,8 @@ def login():
         email = form.email.data
         password = form.password.data
 
+        ################## TODO: Validar usuario ################
+
         return render_template('admin/index.html', email=email)
 
     return render_template('auth/login.html', form=form)
@@ -21,6 +25,11 @@ def login():
 @auth_blueprint.route('/register')
 def register():
     form = RegisterForm()
+
+    ############# TODO: Validar usuario para registro ############33
+    
+   
+
     return render_template('auth/register.html', form=form)
 
 
